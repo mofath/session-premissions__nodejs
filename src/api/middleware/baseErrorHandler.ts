@@ -47,6 +47,8 @@ export default function baseErrorHandler(
     errorResponse = new ServerError();
   }
 
-  logger.error(error);
+  if(process.env.NODE_ENV !== 'test'){
+    logger.error(error);
+  }
   res.status(errorResponse.status).json(errorResponse);
 }

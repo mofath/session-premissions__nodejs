@@ -1,7 +1,6 @@
 import 'mocha';
 import expect from 'expect';
-import { registerUser } from '../../src/utils/testing/authTestUtil.ts';
-import { getTestApp } from '../../src/utils/testing/getTestApp.ts';
+import getTestApp from '../../shared/getTestApp';
 
 describe('Ping GET route', () => {
   let server: any;

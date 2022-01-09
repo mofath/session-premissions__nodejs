@@ -1,7 +1,7 @@
 import express from 'express';
 import http from 'http';
-import config from '../../config';
-import loader from '../../loaders';
+import config from '../config';
+import loader from '../loaders';
 import supertests from 'supertest';
 
 export default async function getTestApp() {
