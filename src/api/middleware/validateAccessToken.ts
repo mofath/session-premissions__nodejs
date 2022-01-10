@@ -6,6 +6,10 @@ function accessTokenAuthValidate({ scope }) {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       const decoded = JWT.verifyAccessToken(req);
+      
+      if(decoded.user_agent !== req.get('user-agent')) {
+        throw new UnauthorizedError('Unauthorized')
+      }
 
       const hasTheRightScope = scope.some(
         (s: string) => decoded.scope.indexOf(s) >= 0

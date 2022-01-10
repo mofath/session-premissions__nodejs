@@ -7,7 +7,10 @@ import { Role } from '../core/domain/enum';
 import 'reflect-metadata';
 
 export class GetAccessTokenUseCase {
-  public static async execute(refreshToken: string): Promise<string> {
+  public static async execute(
+    refreshToken: string,
+    userAgent
+  ): Promise<string> {
     const sessionRepo = Container.get(SessionRepository);
     const userRepo = Container.get(UserRepository);
 
@@ -30,7 +33,8 @@ export class GetAccessTokenUseCase {
     const accessToken = JWT.generateAccessToken(
       session.userId,
       scope,
-      session.id
+      session.id,
+      userAgent
     );
 
     return accessToken;

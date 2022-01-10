@@ -16,7 +16,10 @@ function UserController() {
   }
 
   async function login(req: Request, res: Response) {
-    const result = await LoginUserUseCase.execute(req.body as UserLoginDto);
+    const result = await LoginUserUseCase.execute(
+      req.body as UserLoginDto,
+      req.get('user-agent')
+    );
     return res.status(200).json({
       user: {
         ...result.user,
@@ -32,7 +35,10 @@ function UserController() {
     const { refreshToken } = req.body;
     if (!refreshToken) throw new BadRequestError('Invalid params');
 
-    const accessToken = await GetAccessTokenUseCase.execute(refreshToken);
+    const accessToken = await GetAccessTokenUseCase.execute(
+      refreshToken,
+      req.get('user-agent')
+    );
     return res.status(200).json({
       accessToken,
       message: 'Authenticated',

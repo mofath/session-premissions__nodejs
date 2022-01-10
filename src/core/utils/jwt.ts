@@ -13,13 +13,13 @@ export class JWT {
     return authHeader.substring(7, authHeader.length);
   }
 
-  public static  generateRefreshToken() {
+  public static generateRefreshToken() {
     const refreshToken = crypto
       .randomBytes(Math.ceil(500 / 2))
       .toString('hex')
       .slice(0, 500);
 
-    const refreshTokenHash =  this.hashRefreshToken(refreshToken);
+    const refreshTokenHash = this.hashRefreshToken(refreshToken);
 
     return { refreshToken, refreshTokenHash };
   }
@@ -31,10 +31,11 @@ export class JWT {
   public static generateAccessToken(
     userId: string,
     scope: string[],
-    sessionId: string
+    sessionId: string,
+    userAgent?: string
   ) {
     return jwt.sign(
-      { user_id: userId, scope, session_id: sessionId },
+      { user_id: userId, scope, session_id: sessionId, user_agent: userAgent },
       'jwtSecret',
       {
         algorithm: 'HS256',

@@ -7,7 +7,10 @@ import { Role } from '../core/domain/enum';
 import 'reflect-metadata';
 
 export class LoginUserUseCase {
-  public static async execute({ username, password }): Promise<any> {
+  public static async execute(
+    { username, password },
+    userAgent: string
+  ): Promise<any> {
     const userRepo = Container.get(UserRepository);
     const sessionRepo = Container.get(SessionRepository);
 
@@ -29,11 +32,17 @@ export class LoginUserUseCase {
       scope: scope.join(','),
       validUntil: new Date(Date.now() + 60 * 1000),
       tokenHash: refreshTokenHash,
+      userAgent,
     };
 
     const session = await sessionRepo.save(newSession);
     const sessionId = session?.id as string;
-    const accessToken = JWT.generateAccessToken(foundUser.id, scope, sessionId);
+    const accessToken = JWT.generateAccessToken(
+      foundUser.id,
+      scope,
+      sessionId,
+      userAgent
+    );
     const user = foundUser.get({ plain: true });
     delete user.password;
 

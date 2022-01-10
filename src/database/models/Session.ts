@@ -35,8 +35,15 @@ export default class Session extends Model {
   })
   tokenHash: string;
 
-  @Column
-  valid_until: Date;
+  @Column({
+    field: 'valid_until',
+  })
+  validUntil: Date;
+
+  @Column({
+    field: 'user_agent',
+  })
+  userAgent: string
 
   @AllowNull(false)
   @Default(false)

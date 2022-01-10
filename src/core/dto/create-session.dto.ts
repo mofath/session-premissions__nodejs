@@ -25,4 +25,7 @@ export class CreateSessionDto
   @Expose()
   @IsNotEmpty()
   public validUntil: Date;
+
+  @Expose()
+  public userAgent: string;
 }

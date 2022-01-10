@@ -6,6 +6,7 @@ export class Session {
     public scope: string,
     public tokenHash: string,
     public validUntil: Date,
-    public revoked: boolean
+    public revoked: boolean,
+    public userAgent: string,
   ) {}
 }
