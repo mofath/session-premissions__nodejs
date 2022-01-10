@@ -1,14 +1,21 @@
-export const user = {
-  username: 'ahmed',
+export const demoUser = {
+  username: 'demo',
   password: '123456',
 };
 
+// should be tested after demo user is saved with same name
 export const userExist = {
-  username: 'ahmed',
+  username: 'demo',
   password: '123456',
 };
 
-export const userInvalid = {
-  username: 'ahmed',
-  password: '55555',
+// bad request no password
+export const userInvalidParam = {
+  username: 'demo',
+};
+
+// invalid password
+export const userInvalidCred = {
+  username: 'demo',
+  password: '666666',
 };

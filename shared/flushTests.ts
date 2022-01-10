@@ -1,5 +1,5 @@
 import PromiseBlueBird from 'bluebird';
-import models from '../database/models';
+import models from '../src/database/models';
 
 export default async function flushTests() {
   await PromiseBlueBird.all(

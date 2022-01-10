@@ -1,8 +1,9 @@
 import express from 'express';
 import http from 'http';
-import config from '../config';
-import loader from '../loaders';
 import supertests from 'supertest';
+import loader from '../src/loaders'
+import config from '../src/config'
+
 
 export default async function getTestApp() {
   const app = express();
@@ -13,7 +14,7 @@ export default async function getTestApp() {
     server.listen(config.PORT, () => {
       myapp.start();
     });
-  }
+  }  
 
   async function stop() {
     await server.close();

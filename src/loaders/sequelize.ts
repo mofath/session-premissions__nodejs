@@ -15,8 +15,9 @@ class DBSequelize {
     this.instanceSequelize.addModels(Object.values(models));
     this.instanceSequelize.authenticate();
     await this.instanceSequelize.sync();
-    console.log('Drop and re-sync db.');
-
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Drop and re-sync db.');
+    }
     return {
       models,
       instanceSequelize: this.instanceSequelize,
