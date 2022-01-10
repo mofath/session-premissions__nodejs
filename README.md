@@ -39,3 +39,11 @@ npm run start:dev
 npm run test
 ```
  
+ 
+ | Name            | Group    | Method | Endpoint                        | Scope            | Body              |
+|-----------------|----------|--------|---------------------------------|------------------|-------------------|
+| Register        | Auth     | POST   | /api/v1/auth/register           | Public           | username password |
+| Login           | Auth     | POST   | /api/v1/auth/login              | Public           | username password |
+| Token           | Auth     | POST   | /api/v1/auth/login/access_token | Public           | refreshToken      |
+| Get Resources   | Resource | GET    | /api/v1/resource                | [resource:read]  |                   |
+| Create Resource | Resource | POST   | /api/v1/resource                | [resource:write] | title             |
