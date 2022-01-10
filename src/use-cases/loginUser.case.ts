@@ -18,9 +18,9 @@ export class LoginUserUseCase {
     if (!isPasswordValid) throw new UnauthorizedError('Invalid Credentials');
 
     const scope =
-      foundUser.isVerified || foundUser.role === Role.SUPERVISOR
-        ? ['products:read']
-        : ['products:read', 'products:write'];
+      foundUser.isVerified || foundUser?.role === Role.SUPERVISOR
+        ? ['resource:read', 'resource:write']
+        : ['resource:read'];
 
     const { refreshToken, refreshTokenHash } = JWT.generateRefreshToken();
 

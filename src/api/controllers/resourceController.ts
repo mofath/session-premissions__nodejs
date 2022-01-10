@@ -15,7 +15,7 @@ export default class ResourceConteoller {
     const { id } = req.params;
     const result = ResourceRepositoty.getResourceById(id);
     return res.status(200).json({
-      resources: result,
+      data: result,
       success: true,
       message: 'Resources fetched successfully.',
     });
@@ -25,7 +25,7 @@ export default class ResourceConteoller {
     const { title } = req.body;
     const result = ResourceRepositoty.createResource({ title });
     return res.status(201).json({
-      resources: result,
+      data: result,
       success: true,
       message: 'Resource created successfully.',
     });
@@ -36,7 +36,7 @@ export default class ResourceConteoller {
     const { title } = req.body;
     const result = ResourceRepositoty.updateResource(id, title);
     return res.status(201).json({
-      resources: result,
+      data: result,
       success: true,
       message: 'Resource updated successfully.',
     });

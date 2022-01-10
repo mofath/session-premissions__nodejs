@@ -11,9 +11,6 @@ export class GetAccessTokenUseCase {
     const sessionRepo = Container.get(SessionRepository);
     const userRepo = Container.get(UserRepository);
 
-    console.log(refreshToken);
-    
-
     const tokenHash = JWT.hashRefreshToken(refreshToken);
     const session = await sessionRepo.findOne({ tokenHash });
 
@@ -27,8 +24,8 @@ export class GetAccessTokenUseCase {
 
     const scope =
       user.isVerified || user?.role === Role.SUPERVISOR
-        ? ['resource:read']
-        : ['resource:read', 'resource:write'];
+        ? ['resource:read', 'resource:write']
+        : ['resource:read'];
 
     const accessToken = JWT.generateAccessToken(
       session.userId,

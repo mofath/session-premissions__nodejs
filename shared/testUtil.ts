@@ -3,21 +3,21 @@ import { SuperTest, Test } from 'supertest';
 export function makePostRequest(
   request: SuperTest<Test>,
   endpoint: string,
-  body: Object
+  body: Object,
+  token?: string
 ) {
-  return request
-    .post(endpoint)
-    .set('Content-Type', 'application/json')
-    .send(body);
+  const req = request.post(endpoint).set('Content-Type', 'application/json');
+  if (token) req.set('Authorization', 'Bearer ' + token);
+  return req.send(body);
 }
 
 export function makeGetRequest(
   request: SuperTest<Test>,
   endpoint: string,
+  token?: string
 ) {
-  return request
-    .get(endpoint)
-    .set('Content-Type', 'application/json')
-    .send();
+  const req = request.get(endpoint)
+  .set('Content-Type', 'application/json');
+  if (token) req.set('Authorization', 'Bearer ' + token);
+  return req.send();
 }
-

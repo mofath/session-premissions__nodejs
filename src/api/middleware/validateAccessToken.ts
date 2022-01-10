@@ -7,14 +7,12 @@ function accessTokenAuthValidate({ scope }) {
     try {
       const decoded = JWT.verifyAccessToken(req);
 
-      // skip admin from checking scope
-      if (
-        decoded.audience !== 'admin' &&
-        decoded.scope.includes(scope) !== false
-      ) {
-        throw new UnauthorizedError(
-          `Requested resource premission out of user scope`
-        );
+      const hasTheRightScope = scope.some(
+        (s: string) => decoded.scope.indexOf(s) >= 0
+      );
+
+      if (!hasTheRightScope) {
+        throw new UnauthorizedError(`Doesn't have scope required`);
       }
 
       req.user = {

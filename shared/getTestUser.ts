@@ -10,14 +10,24 @@ export async function getAuthUser(request, userCred) {
   await registerUser(request, userCred);
 
   // get user info and token
-  const loginRes: any = await makePostRequest(
+  const res: any = await makePostRequest(
     request,
     '/api/v1/auth/login',
     demoUser
   );
 
-  return {
-    data: loginRes.body,
-    status: loginRes.status,
-  };
+  return res.body.user;
+}
+
+export async function getItem(request, token) {
+  const res: any = await makePostRequest(
+    request,
+    '/api/v1/resource',
+    {
+      title: 'item-test',
+    },
+    token
+  );
+
+  return res.body.data;
 }
